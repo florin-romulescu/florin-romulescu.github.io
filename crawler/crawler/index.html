@@ -1,0 +1,818 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="This project is an application that analyzes concept drifting in research papers.
+">
+      
+      
+        <meta name="author" content="Florin Romulescu">
+      
+      
+        <link rel="canonical" href="https://florin-romulescu.github.io/licenta/crawler/crawler/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../publication/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Crawler - Final Year Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#crawler-service-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Final Year Project" class="md-header__button md-logo" aria-label="Final Year Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Final Year Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Crawler
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Final Year Project" class="md-nav__button md-logo" aria-label="Final Year Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Final Year Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Crawler
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Crawler
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-crawlerservice-abstract-base-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CrawlerService (Abstract Base Class)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. CrawlerService (Abstract Base Class)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-semanticcrawlerservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. SemanticCrawlerService
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. SemanticCrawlerService">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crawlself-query-str-publication" class="md-nav__link">
+    <span class="md-ellipsis">
+      crawl(self, query: str) -&gt; Publication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_publicationself-paper_id-str-publication" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_publication(self, paper_id: str) -&gt; Publication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-models-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Models Used
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../publication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Publication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-crawlerservice-abstract-base-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CrawlerService (Abstract Base Class)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. CrawlerService (Abstract Base Class)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-semanticcrawlerservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. SemanticCrawlerService
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. SemanticCrawlerService">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crawlself-query-str-publication" class="md-nav__link">
+    <span class="md-ellipsis">
+      crawl(self, query: str) -&gt; Publication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_publicationself-paper_id-str-publication" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_publication(self, paper_id: str) -&gt; Publication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-models-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Models Used
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="crawler-service-documentation"><strong>Crawler Service Documentation</strong></h1>
+<h2 id="overview"><strong>Overview</strong></h2>
+<p>This module provides services for crawling and fetching publication data from various sources, specifically integrating with the <strong>Semantic Scholar API</strong>. The core functionality revolves around retrieving metadata for academic papers based on search queries and unique identifiers.</p>
+<hr />
+<h2 id="classes"><strong>Classes</strong></h2>
+<h3 id="1-crawlerservice-abstract-base-class"><strong>1. <code>CrawlerService</code> (Abstract Base Class)</strong></h3>
+<h4 id="description"><strong>Description</strong></h4>
+<p><code>CrawlerService</code> is an abstract base class that defines a common interface for web crawling services.</p>
+<h4 id="methods"><strong>Methods</strong></h4>
+<ul>
+<li><code>crawl(self, query: str) -&gt; Publication</code></li>
+<li>Abstract method that must be implemented by subclasses.</li>
+<li>It should accept a <strong>search query</strong> as input and return a <code>Publication</code> object.</li>
+<li><code>get_publication(self, paper_id: str) -&gt; Publication</code></li>
+<li>Abstract method that must be implemented by subclasses.</li>
+<li>It should accept a <strong>paper ID</strong> as input and return a <code>Publication</code> object.</li>
+</ul>
+<hr />
+<h3 id="2-semanticcrawlerservice"><strong>2. <code>SemanticCrawlerService</code></strong></h3>
+<h4 id="description_1"><strong>Description</strong></h4>
+<p><code>SemanticCrawlerService</code> is a concrete implementation of <code>CrawlerService</code> that interacts with the <strong>Semantic Scholar API</strong> to fetch publication details.</p>
+<h4 id="methods_1"><strong>Methods</strong></h4>
+<h5 id="crawlself-query-str-publication"><strong><code>crawl(self, query: str) -&gt; Publication</code></strong></h5>
+<ul>
+<li>
+<p><strong>Purpose</strong>:</p>
+</li>
+<li>
+<p>Searches for a publication based on a given query string using the Semantic Scholar API.</p>
+</li>
+<li>
+<p>Retrieves the first matching paper’s ID and fetches its full details.</p>
+</li>
+<li>
+<p><strong>Process</strong>:</p>
+</li>
+<li>
+<p>Sends a <strong>GET request</strong> to the Semantic Scholar search API with the query.</p>
+</li>
+<li>Handles rate limiting (<code>HTTP 429</code>) by retrying with a short delay.</li>
+<li>Extracts the <code>paperId</code> from the response.</li>
+<li>
+<p>Calls <code>get_publication(paper_id)</code> to fetch complete details.</p>
+</li>
+<li>
+<p><strong>Parameters</strong>:</p>
+</li>
+<li>
+<p><code>query</code> (<code>str</code>): The search term used to find publications.</p>
+</li>
+<li>
+<p><strong>Returns</strong>:</p>
+</li>
+<li><code>Publication</code>: A <code>Publication</code> object containing metadata of the first matching paper.</li>
+<li><code>None</code>: If no results are found.</li>
+</ul>
+<h5 id="get_publicationself-paper_id-str-publication"><strong><code>get_publication(self, paper_id: str) -&gt; Publication</code></strong></h5>
+<ul>
+<li>
+<p><strong>Purpose</strong>:</p>
+</li>
+<li>
+<p>Fetches detailed metadata of a publication using its <strong>paper ID</strong> from the Semantic Scholar API.</p>
+</li>
+<li>
+<p><strong>Process</strong>:</p>
+</li>
+<li>
+<p>Constructs the API request URL with specific metadata fields.</p>
+</li>
+<li>Sends a <strong>GET request</strong> with API authentication.</li>
+<li>Handles rate limiting (<code>HTTP 429</code>) with retries.</li>
+<li>
+<p>Parses the response JSON and constructs a <code>SemanticPublication</code> object.</p>
+</li>
+<li>
+<p><strong>Parameters</strong>:</p>
+</li>
+<li>
+<p><code>paper_id</code> (<code>str</code>): Unique identifier of the paper from Semantic Scholar.</p>
+</li>
+<li>
+<p><strong>Returns</strong>:</p>
+</li>
+<li><code>SemanticPublication</code>: A detailed representation of the paper, including title, authors, citations, fields of study, and availability.</li>
+</ul>
+<hr />
+<h2 id="data-models-used"><strong>Data Models Used</strong></h2>
+<ul>
+<li><strong><code>Publication</code></strong>: A general class representing publication details.</li>
+<li><strong><code>SemanticPublication</code></strong>: A specialized subclass with additional Semantic Scholar metadata.</li>
+<li><strong><code>Bib</code></strong>: A bibliographic metadata container (title, authors, year, venue, abstract).</li>
+<li><strong><code>Author</code></strong>: Represents an author with a name and unique identifier.</li>
+</ul>
+<hr />
+<h2 id="dependencies"><strong>Dependencies</strong></h2>
+<ul>
+<li><code>requests</code> (for API communication)</li>
+<li><code>time</code> (for handling rate limits)</li>
+<li><code>abc</code> (for defining abstract classes)</li>
+<li><code>crawler.config</code> (for API key and configuration)</li>
+<li><code>crawler.publication</code> (for publication data models)</li>
+</ul>
+<hr />
+<h2 id="usage-example"><strong>Usage Example</strong></h2>
+<pre><code class="language-python">from crawler.semantic_crawler import SemanticCrawlerService
+
+crawler = SemanticCrawlerService()
+publication = crawler.crawl(&quot;Machine Learning in Healthcare&quot;)
+
+if publication:
+    print(f&quot;Title: {publication.bib.title}&quot;)
+    print(f&quot;Authors: {[author.name for author in publication.bib.authors]}&quot;)
+    print(f&quot;Year: {publication.bib.pub_year}&quot;)
+    print(f&quot;URL: {publication.url}&quot;)
+else:
+    print(&quot;No publication found.&quot;)
+</code></pre>
+<hr />
+<h2 id="notes"><strong>Notes</strong></h2>
+<ul>
+<li>Ensure a valid <strong>API key</strong> is provided in <code>crawler.config</code>.</li>
+<li>The Semantic Scholar API has request limits; the service implements <strong>retry logic</strong> for rate-limited requests (<code>429 Too Many Requests</code>).</li>
+<li>The crawler <strong>only returns the first matching result</strong> from a search query.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>
